@@ -30,12 +30,7 @@ export default defineConfig({
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 50 * 1024 * 1024,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,wasm}'],
-        additionalManifestEntries: [
-          { url: '/model/model.json', revision: null },
-          { url: '/model/metadata.json', revision: null },
-          { url: '/model/weights.bin', revision: null }
-        ],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,wasm,bin}'],
         runtimeCaching: [
           // 1. Cache First (Cache Fallback to Network) untuk Model AI Hugging Face
           {

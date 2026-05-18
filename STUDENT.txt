@@ -1,1 +1,1 @@
-APP_URL=https://rootfacts-react-pwa.netlify.app
+APP_URL=https://project2fesyra.netlify.app

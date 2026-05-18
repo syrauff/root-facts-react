@@ -29,14 +29,28 @@ export default defineConfig({
         ]
       },
       workbox: {
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024,
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,wasm}'],
         additionalManifestEntries: [
           { url: '/model/model.json', revision: null },
           { url: '/model/metadata.json', revision: null },
           { url: '/model/weights.bin', revision: null }
         ],
         runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/huggingface\.co\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'huggingface-models-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 365
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
